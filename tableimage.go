@@ -18,48 +18,6 @@ type tableImage struct {
 	img             *image.RGBA
 }
 
-// func Start(ths []string, trs [][]string) {
-
-// 	var totalRowNo = len(trs) + 1
-// 	var totalColumnNo = len(ths)
-// 	var columnSpace = getMaxAmountOfLetters(ths, trs) * letterPerPx
-// 	var H = totalRowNo*rowSpace + rowSpace
-// 	var W = totalColumnNo * int(columnSpace)
-
-// 	dc := gg.NewContext(W, H)
-
-// 	dc.SetHexColor("#FFFFFF")
-// 	dc.Clear()
-// 	dc.SetHexColor("#000000")
-
-// 	for colNo, th := range ths {
-// 		dc.DrawString(th, float64(colNo)*columnSpace+tablePadding, 1*rowSpace)
-// 	}
-
-// 	//draw the double line for th's
-// 	dc.DrawLine(1, 1*rowSpace+separatorPadding, float64(W), 1*rowSpace+separatorPadding)
-// 	dc.DrawLine(1, 1*rowSpace+separatorPadding+2, float64(W), 1*rowSpace+separatorPadding+2)
-
-// 	for rowNo, tds := range trs {
-// 		//start with the second row since the firsone is the th
-// 		fRowNo := float64(rowNo + 2)
-// 		dc.SetHexColor("#000")
-// 		for colNo, td := range tds {
-// 			fColNo := float64(colNo)
-// 			if colNo == 0 {
-// 				dc.DrawString(td, columnSpace-columnSpace+tablePadding, fRowNo*rowSpace)
-// 			}
-// 			dc.DrawString(td, fColNo*columnSpace+tablePadding, fRowNo*rowSpace)
-// 		}
-// 		dc.DrawLine(1, fRowNo*rowSpace+separatorPadding, float64(W), fRowNo*rowSpace+separatorPadding)
-// 	}
-
-// 	//set table line color
-// 	dc.SetRGB(0, 0, 0)
-// 	dc.Stroke()
-// 	dc.SavePNG("./out.png")
-// }
-
 func Start(ths []string, trs [][]string) {
 
 	var totalRowNo = len(trs) + 1
