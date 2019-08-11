@@ -43,7 +43,7 @@ var trs = [][]string{
 	},
 }
 
-func TestStart(t *testing.T) {
+func TestGenerateTableImage(t *testing.T) {
 	type args struct {
 		ths []string
 		trs [][]string
@@ -62,7 +62,7 @@ func TestStart(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			Start(tt.args.ths, tt.args.trs)
+			GenerateTableImage(tt.args.ths, tt.args.trs)
 		})
 	}
 }
