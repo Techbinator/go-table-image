@@ -3,24 +3,11 @@ package tableimage
 import (
 	"image"
 	"image/draw"
-	"image/jpeg"
-	"image/png"
-	"os"
 
 	"golang.org/x/image/font"
 	"golang.org/x/image/font/basicfont"
 	"golang.org/x/image/math/fixed"
 )
-
-func createContext(width int, height int, backgroundColor string) tableImage {
-	ti := tableImage{
-		width:           width,
-		height:          height,
-		backgroundColor: backgroundColor,
-	}
-	ti.setRgba()
-	return ti
-}
 
 func (ti *tableImage) setRgba() {
 	img := image.NewRGBA(image.Rect(0, 0, ti.width, ti.height))
@@ -153,22 +140,5 @@ func (ti *tableImage) addLine(x1, y1, x2, y2 int, color string) {
 			}
 		}
 		ti.img.Set(x2, y2, col)
-	}
-}
-
-func (ti *tableImage) save(fileType string, filePath string) {
-	f, err := os.Create(filePath)
-	if err != nil {
-		panic(err)
-	}
-	defer f.Close()
-	if fileType == "jpg" {
-		if err := jpeg.Encode(f, ti.img, nil); err != nil {
-			panic(err)
-		}
-	} else {
-		if err := png.Encode(f, ti.img); err != nil {
-			panic(err)
-		}
 	}
 }

@@ -1,4 +1,4 @@
-module goimg
+module tableimage
 
 go 1.12
 

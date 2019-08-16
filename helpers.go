@@ -33,18 +33,18 @@ func getColorByHex(hexColor string) color.RGBA {
 	return color.RGBA{uint8(r), uint8(g), uint8(b), uint8(a)}
 }
 
-func getMaxAmountOfLetters(ths []string, trs [][]string) int {
+func getMaxAmountOfLetters(ths TR, trs []TR) int {
 	var maxColSpace = 0
-	for _, th := range ths {
-		if len(th) > maxColSpace {
-			maxColSpace = len(th)
+	for _, th := range ths.Tds {
+		if len(th.Text) > maxColSpace {
+			maxColSpace = len(th.Text)
 		}
 	}
 
 	for _, tr := range trs {
-		for _, td := range tr {
-			if len(td) > maxColSpace {
-				maxColSpace = len(td)
+		for _, td := range tr.Tds {
+			if len(td.Text) > maxColSpace {
+				maxColSpace = len(td.Text)
 			}
 		}
 
