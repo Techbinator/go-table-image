@@ -52,3 +52,44 @@ func getMaxAmountOfLetters(ths TR, trs []TR) int {
 
 	return maxColSpace
 }
+
+func wrapText(input string, limit int) []string {
+	if limit < 1 {
+		panic("Wrapper limit cannot be less than 1.")
+	}
+
+	var wrapped []string
+
+	// Split string into array of words
+	words := strings.Fields(input)
+	wordsLength := len(words)
+
+	if wordsLength == 0 {
+		return wrapped
+	}
+
+	var lineText string
+
+	for i, word := range words {
+
+		if len(lineText)+len(word)+1 >= limit {
+			wrapped = append(wrapped, lineText)
+			lineText = word
+		} else {
+			if lineText == "" {
+				lineText += word
+			} else {
+				lineText += " " + word
+			}
+			//if it is the last word
+			if i == wordsLength-1 {
+				wrapped = append(wrapped, lineText)
+			}
+
+		}
+
+	}
+
+	return wrapped
+
+}
