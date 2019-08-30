@@ -38,7 +38,7 @@ func main() {
 					},
 					tableimage.TD{
 						Color: "#000",
-						Text:  "Really cool product",
+						Text:  "Really cool product on two lines",
 					},
 					tableimage.TD{
 						Color: "#0000ff",
