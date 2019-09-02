@@ -33,30 +33,7 @@ func getColorByHex(hexColor string) color.RGBA {
 	return color.RGBA{uint8(r), uint8(g), uint8(b), uint8(a)}
 }
 
-func getMaxAmountOfLetters(ths TR, trs []TR) int {
-	var maxColSpace = 0
-	for _, th := range ths.Tds {
-		if len(th.Text) > maxColSpace {
-			maxColSpace = len(th.Text)
-		}
-	}
-
-	for _, tr := range trs {
-		for _, td := range tr.Tds {
-			if len(td.Text) > maxColSpace {
-				maxColSpace = len(td.Text)
-			}
-		}
-
-	}
-
-	return maxColSpace
-}
-
-func wrapText(input string, limit int) []string {
-	if limit < 1 {
-		panic("Wrapper limit cannot be less than 1.")
-	}
+func wrapText(input string) []string {
 
 	var wrapped []string
 
@@ -72,7 +49,7 @@ func wrapText(input string, limit int) []string {
 
 	for i, word := range words {
 
-		if len(lineText)+len(word)+1 >= limit {
+		if len(lineText)+len(word)+1 >= wrapWordsLen {
 			wrapped = append(wrapped, lineText)
 			lineText = word
 		} else {

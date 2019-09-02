@@ -22,7 +22,6 @@ type TR struct {
 type tableImage struct {
 	width           int
 	height          int
-	columnSpace     int
 	th              TR
 	trs             []TR
 	backgroundColor string
@@ -36,6 +35,8 @@ const (
 	tablePadding              = 20
 	letterPerPx               = 10
 	separatorPadding          = 10
+	wrapWordsLen              = 20
+	columnSpace               = wrapWordsLen * letterPerPx
 	PNG              FileType = "png"
 	JPEG             FileType = "jpg"
 )
@@ -59,15 +60,13 @@ func (ti *tableImage) AddTRs(trs []TR) {
 }
 
 func (ti *tableImage) Save() {
-	var totalRowNo = len(ti.trs) + 1
-	var totalColumnNo = len(ti.th.Tds)
-	var columnSpace = getMaxAmountOfLetters(ti.th, ti.trs) * letterPerPx
-	ti.columnSpace = columnSpace
-	ti.height = totalRowNo*rowSpace + rowSpace
-	ti.width = totalColumnNo * int(columnSpace)
+	ti.calculateHeight()
+	ti.calculateWidth()
 
 	ti.setRgba()
+
 	ti.drawTH()
 	ti.drawTR()
+
 	ti.saveFile()
 }

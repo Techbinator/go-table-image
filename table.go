@@ -8,8 +8,8 @@ import (
 
 func (ti *tableImage) drawTH() {
 	for colNo, td := range ti.th.Tds {
-		ti.addString(colNo*ti.columnSpace+tablePadding, 1*rowSpace, td.Text, td.Color)
-		ti.addLine(colNo*ti.columnSpace, 0, colNo*ti.columnSpace, ti.height, "#000000")
+		ti.addString(colNo*columnSpace+tablePadding, 1*rowSpace, td.Text, td.Color)
+		ti.addLine(colNo*columnSpace, 0, colNo*columnSpace, ti.height, "#000000")
 	}
 
 	//draw the double line to signal it is a th
@@ -23,14 +23,41 @@ func (ti *tableImage) drawTR() {
 		//start with the second row since the first one is the th
 		fRowNo := rowNo + 2
 		for colNo, td := range tds.Tds {
-
-			if colNo == 0 {
-				ti.addString(ti.columnSpace-ti.columnSpace+tablePadding, fRowNo*rowSpace, td.Text, td.Color)
+			wrapedTexts := wrapText(td.Text)
+			for noTextRows, wrapedText := range wrapedTexts {
+				noTextRows = noTextRows + 1
+				if colNo == 0 {
+					ti.addString(columnSpace-columnSpace+tablePadding, fRowNo*rowSpace, wrapedText, td.Color)
+				}
+				ti.addString(colNo*columnSpace+tablePadding, fRowNo*rowSpace, wrapedText, td.Color)
 			}
-			ti.addString(colNo*ti.columnSpace+tablePadding, fRowNo*rowSpace, td.Text, td.Color)
+
 		}
 		ti.addLine(1, fRowNo*rowSpace+separatorPadding, ti.width, fRowNo*rowSpace+separatorPadding, "#000")
 	}
+}
+
+func (ti *tableImage) calculateHeight() {
+	//start from 1 since we have th
+	totalRowNo := 1
+	for _, tr := range ti.trs {
+		maxRowHeight := 1
+		for _, td := range tr.Tds {
+			wrapedText := wrapText(td.Text)
+			// in case we have a multi line text
+			if len(wrapedText) > maxRowHeight {
+				maxRowHeight = len(wrapedText)
+			}
+		}
+		totalRowNo += maxRowHeight
+	}
+	ti.height = totalRowNo*rowSpace + rowSpace
+}
+
+func (ti *tableImage) calculateWidth() {
+	totalColumnNo := len(ti.th.Tds)
+
+	ti.width = totalColumnNo * columnSpace
 }
 
 func (ti *tableImage) saveFile() {
