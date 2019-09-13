@@ -11,7 +11,8 @@ func (ti *tableImage) drawTH() {
 		ti.addString(colNo*columnSpace+tablePadding, 1*rowSpace, td.Text, td.Color)
 		ti.addLine(colNo*columnSpace, 0, colNo*columnSpace, ti.height, "#000000")
 	}
-
+	//draw the end line
+	ti.addLine(ti.width-1, 0, ti.width-1, ti.height, "#000000")
 	//draw the double line to signal it is a th
 	ti.addLine(1, 1*rowSpace+separatorPadding, ti.width, 1*rowSpace+separatorPadding, "#000000")
 	ti.addLine(1, 1*rowSpace+separatorPadding+2, ti.width, 1*rowSpace+separatorPadding+2, "#000000")
@@ -59,7 +60,7 @@ func (ti *tableImage) calculateHeight() {
 		}
 		totalRowNo += maxRowHeight
 	}
-	ti.height = totalRowNo*rowSpace + rowSpace
+	ti.height = totalRowNo*rowSpace + rowSpace - tablePadding + 5
 }
 
 func (ti *tableImage) calculateWidth() {
