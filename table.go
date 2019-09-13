@@ -19,21 +19,29 @@ func (ti *tableImage) drawTH() {
 }
 
 func (ti *tableImage) drawTR() {
-	for rowNo, tds := range ti.trs {
+	fRowNo := 2
+	for _, tds := range ti.trs {
 		//start with the second row since the first one is the th
-		fRowNo := rowNo + 2
+		maxRowHeight := 1
 		for colNo, td := range tds.Tds {
 			wrapedTexts := wrapText(td.Text)
-			for noTextRows, wrapedText := range wrapedTexts {
-				noTextRows = noTextRows + 1
-				if colNo == 0 {
-					ti.addString(columnSpace-columnSpace+tablePadding, fRowNo*rowSpace, wrapedText, td.Color)
-				}
-				ti.addString(colNo*columnSpace+tablePadding, fRowNo*rowSpace, wrapedText, td.Color)
+			noRowPerCol := len(wrapedTexts)
+			if maxRowHeight < noRowPerCol {
+				maxRowHeight = noRowPerCol
 			}
+			for noTextRows, wrapedText := range wrapedTexts {
+				colHeight := (fRowNo + noTextRows) * rowSpace
+				colWidth := colNo*columnSpace + tablePadding
 
+				if colNo == 0 {
+					colWidth = columnSpace - columnSpace + tablePadding
+				}
+
+				ti.addString(colWidth, colHeight, wrapedText, td.Color)
+			}
 		}
-		ti.addLine(1, fRowNo*rowSpace+separatorPadding, ti.width, fRowNo*rowSpace+separatorPadding, "#000")
+		fRowNo += maxRowHeight
+		ti.addLine(1, (fRowNo-1)*rowSpace+separatorPadding, ti.width, (fRowNo-1)*rowSpace+separatorPadding, "#000")
 	}
 }
 

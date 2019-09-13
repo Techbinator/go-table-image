@@ -31,7 +31,7 @@ type tableImage struct {
 }
 
 const (
-	rowSpace                  = 30
+	rowSpace                  = 26
 	tablePadding              = 20
 	letterPerPx               = 10
 	separatorPadding          = 10
