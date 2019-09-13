@@ -4,7 +4,7 @@ import (
 	"image"
 )
 
-//FileType the image format pmng or jpg
+//FileType the image format png or jpg
 type FileType string
 
 //TD a table data container
@@ -13,7 +13,7 @@ type TD struct {
 	Color string
 }
 
-//TR a table row
+//TR the table row
 type TR struct {
 	BorderColor string
 	Tds         []TD
@@ -41,6 +41,7 @@ const (
 	JPEG             FileType = "jpg"
 )
 
+//Init initialise the table image receiver
 func Init(backgroundColor string, fileType FileType, filePath string) tableImage {
 	ti := tableImage{
 		backgroundColor: backgroundColor,
@@ -51,14 +52,17 @@ func Init(backgroundColor string, fileType FileType, filePath string) tableImage
 	return ti
 }
 
+//AddTH adds the table header
 func (ti *tableImage) AddTH(th TR) {
 	ti.th = th
 }
 
+//AddTRs add the table rows
 func (ti *tableImage) AddTRs(trs []TR) {
 	ti.trs = trs
 }
 
+//Save saves the table
 func (ti *tableImage) Save() {
 	ti.calculateHeight()
 	ti.calculateWidth()

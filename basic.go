@@ -29,8 +29,9 @@ func (ti *tableImage) addString(x, y int, label string, color string) {
 	d.DrawString(label)
 }
 
+//Thx to https://github.com/StephaneBunel/bresenham
 func (ti *tableImage) addLine(x1, y1, x2, y2 int, color string) {
-	//Thx to https://github.com/StephaneBunel/bresenham
+
 	var dx, dy, e, slope int
 	col := getColorByHex(color)
 	// Because drawing p1 -> p2 is equivalent to draw p2 -> p1,

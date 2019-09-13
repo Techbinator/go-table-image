@@ -2,6 +2,8 @@
 
 Generates a table inside of a image (png or jpg format) based on the provided data
 
+[![GoDoc](https://godoc.org/github.com/techbinator/go-table-image?status.svg)](https://godoc.org/github.com/techbinator/go-table-image)
+
 ### Goals
 
 - Provide a simple interface in order to generate tables as image programatically
