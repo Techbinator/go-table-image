@@ -7,6 +7,13 @@ Generates a table inside of a image (png or jpg format) based on the provided da
 - Provide a simple interface in order to generate tables as image programatically
 - Save as png or jpg
 - Ability to modify colors, multi line columns, image size optimisation
+- Do not use any other 3rd party libraries, in order to provide a small bundle size
+
+### Usage examples
+
+- Send slack notification for bigger reports that the Slack api will send as a huge attachment
+- Use in combination with a package like https://github.com/rivo/tview in order to create tables from terminal
+- Add implementation that would fetch data for example from a json file and generate the image from that
 
 ### Usage
 
