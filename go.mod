@@ -1,4 +1,4 @@
-module tableimage
+module github.com/Techbinator/go-table-image
 
 go 1.12
 
